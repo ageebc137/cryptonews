@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
+import AppRouter from './router/AppRouter';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      news: [],
+      price: []
+    };
+  }
   componentDidMount() {
     console.log('Component did mount!');
-    this.checkAsync()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
-  }
-  checkAsync = async() => {
-    const response = await fetch('/test');
-
-
-    if (response.status !== 200) throw Error(response);
-    return response;
   }
 
   render() {
     return (
       <div className="App">
-        <nav>
-          <a href="#"> NEW</a> |
-          <a href="#"> BITCOIN</a> |
-          <a href="#"> SOMETHING</a>
-        </nav>
+        <AppRouter />
       </div>
     );
   }
