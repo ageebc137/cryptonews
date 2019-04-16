@@ -2,15 +2,16 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+const getInfoRouter = require('./routes/getinfo');
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(bodyParser.json());
 
-app.get(('/test'), (req,res) => {
-  res.send('test succeeded!');
-});
+app.use('/api', getInfoRouter);
 
 app.listen(port, () => console.log(`App is running on port ${port}`));
