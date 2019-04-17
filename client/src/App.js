@@ -13,6 +13,7 @@ class App extends Component {
     };
     this.updateTicker = this.updateTicker.bind(this);
     this.updateNews = this.updateNews.bind(this);
+    this.changeCurrency = this.changeCurrency.bind(this);
   }
   updateTicker() {
       setInterval( () => {
@@ -41,7 +42,11 @@ class App extends Component {
       });
     });
   }
-
+  changeCurrency(currency) {
+    this.setState({
+      currency
+    });
+  }
   componentDidMount() {
     let news;
     axios.get(('/api/getnews')).then((res) => {
@@ -71,6 +76,7 @@ class App extends Component {
           prevPrice={this.state.prevPrice} 
           currency={this.state.currency}
           updateNews={this.updateNews}
+          changeCurrency={this.changeCurrency}
         />
       </div>
     );

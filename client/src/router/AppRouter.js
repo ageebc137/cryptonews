@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import NewsPage from '../components/NewsPage';
 import PricePage from '../components/PricePage';
 import SettingsPage from '../components/SettingsPage';
+import SignupPage from '../components/SignupPage';
+import LoginPage from '../components/LoginPage';
+import BookmarksPage from '../components/BookmarksPage';
 
 class AppRouter extends Component {
     constructor(props) {
@@ -23,9 +26,11 @@ class AppRouter extends Component {
                                             currency={this.props.currency}
                                         />
                                     )}/>
-                    <Route path="/settings" component={SettingsPage} />
-                    {/* <Route path="/login" component={LoginPage} />
-                    <Route path="/signup" component={SignUpPage} /> */}
+                    <Route path="/settings" render={() => (<SettingsPage currency={this.props.currency} 
+                                                                    changeCurrency={this.props.changeCurrency}/>)} />
+                    <Route path="/login" component={LoginPage} />
+                    <Route path="/bookmarks" component={BookmarksPage} />
+                    <Route path="/signup" component={SignupPage} />
                 </Switch>
             </BrowserRouter>
         );

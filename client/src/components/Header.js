@@ -5,10 +5,12 @@ class Header extends Component {
     render() {
         return (
             <header>
-            <h1>Blockchain News</h1>
+            <h1>CCN</h1>
             <Link onClick={this.props.updateNews} to="/">News</Link>
-            <Link  to="/price">Crypto Prices</Link>
+            <Link  to="/price">Prices</Link>
             <Link to="/settings">Settings</Link>
+            <Link to="/bookmarks">Bookmarks</Link>
+            <Link to="/login">Login</Link>
         </header>
         );
     }
