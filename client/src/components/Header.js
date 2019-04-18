@@ -5,10 +5,9 @@ class Header extends Component {
     render() {
         return (
             <header>
-            <h1>CCN</h1>
+            <img src="./img/CCN-Logo.png" alt="CCN-logo"/>
             <Link onClick={this.props.updateNews} to="/">News</Link>
             <Link  to="/price">Prices</Link>
-            <Link to="/settings">Settings</Link>
             <Link to="/bookmarks">Bookmarks</Link>
             <Link to="/login">Login</Link>
         </header>

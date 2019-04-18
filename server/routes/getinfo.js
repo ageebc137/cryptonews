@@ -4,7 +4,7 @@ const axios = require('axios');
 const router = express.Router();
 
 router.get('/getnews', (req,res) => {
-    axios.get("https://newsapi.org/v2/everything?q=blockchain%bitcoin&sortBy=publishedAt&apiKey=96bd39f263db40a993f011c4b2287661&sources=crypto-coins-news")
+    axios.get("https://newsapi.org/v2/everything?q=blockchain%bitcoin&apiKey=96bd39f263db40a993f011c4b2287661&sources=crypto-coins-news")
     .then((response) => {
       res.send(response.data);
     });
