@@ -29,6 +29,7 @@ class SignupPage extends Component {
                     <input onChange={handleConfirmPassword} type="password" placeholder="confirm password"/>
                     <button onClick={handleRegister}>Register</button>
                 </form>
+                <p>{this.props.message}</p>
             </div>
         )
     }

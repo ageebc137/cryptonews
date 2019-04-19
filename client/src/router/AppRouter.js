@@ -30,6 +30,7 @@ class AppRouter extends Component {
                                                             handleUsername={this.props.handleUsername}
                                                             handlePassword={this.props.handlePassword}
                                                             handleLogin={this.props.handleLogin}
+                                                            loggedIn={this.props.loggedIn}
                                                         />)} />
                     <Route path="/bookmarks" component={BookmarksPage} />
                     <Route path="/signup" render={() => (<SignupPage 
@@ -37,6 +38,7 @@ class AppRouter extends Component {
                                                             handleCreatePassword={this.props.handleCreatePassword}
                                                             handleConfirmPassword={this.props.handleConfirmPassword}
                                                             handleRegister={this.props.handleRegister}
+                                                            message={this.props.message}
                                                             />)} />
                 </Switch>
             </BrowserRouter>

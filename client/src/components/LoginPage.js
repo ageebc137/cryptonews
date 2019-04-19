@@ -16,12 +16,14 @@ class LoginPage extends Component {
         }
         return (
             <div>
-                <form>
-                    <input onChange={handleUsername} type="textbox" placeholder="username"/>
-                    <input onChange={handlePassword} type="password" placeholder="password" />
-                    <button onClick={handleLogin}type="submit">Submit</button>
-                </form>
-                <p>Don't have an account? <a href="/signup" >Create an account</a></p>
+                {this.props.loggedIn ? (<p>You are now logged in</p>): (<div>
+                    <form>
+                        <input onChange={handleUsername} type="textbox" placeholder="username"/>
+                        <input onChange={handlePassword} type="password" placeholder="password" />
+                        <button onClick={handleLogin}type="submit">Submit</button>
+                    </form>
+                <p>Don't have an account? <a href="/signup" >Create an account</a></p> </div>)}
+                  
             </div>
         );
     }

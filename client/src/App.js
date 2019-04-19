@@ -6,6 +6,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loggedIn: false,
+      message: "",
       news: [],
       price: "",
       prevPrice: "",
@@ -15,7 +17,8 @@ class App extends Component {
       password: "",
       createUsername:"",
       createPassword: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      bookmarks: []
     };
     this.updateTicker = this.updateTicker.bind(this);
     this.updateNews = this.updateNews.bind(this);
@@ -57,7 +60,22 @@ class App extends Component {
     });
   }
   handleRegister() {
-    console.log(this.state.createUsername, this.state.createPassword, this.state.confirmPassword);
+    console.log(this.state.createPassword, this.state.confirmPassword);
+    if (this.state.createPassword.length < 6 || this.state.confirmPassword.length < 6) {
+          console.log('hello');
+          this.setState({
+            message: 'The password is fewer than 6 characters'
+          });
+          return;
+    }else if (this.state.createPassword !== this.state.confirmPassword) {
+          this.setState({
+            message: 'The passwords do not match'
+          });
+          return;
+    }
+    
+    axios.get('/api/register')
+
   }
   updateTicker() {
       setInterval( () => {
@@ -128,6 +146,8 @@ class App extends Component {
           handleConfirmPassword={this.handleConfirmPassword}
           handleLogin={this.handleLogin}
           handleRegister={this.handleRegister}
+          message={this.state.message}
+          loggedIn={this.state.loggedIn}
         />
       </div>
     );
