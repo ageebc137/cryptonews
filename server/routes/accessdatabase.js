@@ -9,12 +9,19 @@ const router = express.Router();
 router.get('/register', (req,res) => {
    let body = _.pick(req.body, ['username', 'password']);
    let user = new User(body);
-   console.log('hello');
    user.save().then(() => {
-       console.log(user, 'bop');
        res.send(user);
    })
    .catch((err) => res.status(400).send(err));
 });
+
+router.get('/login', (req,res) => {
+    let body = _.pick(req.body, ['username', 'password']);
+    User.findByCredentials(body.username, body.password).then((user) => {
+        res.send(user);
+    });
+})
+
+// Add router.get('/bookmarks');
 
 module.exports = router;
