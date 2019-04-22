@@ -6,6 +6,7 @@ import PricePage from '../components/PricePage';
 import SignupPage from '../components/SignupPage';
 import LoginPage from '../components/LoginPage';
 import BookmarksPage from '../components/BookmarksPage';
+import ProfilePage from '../components/ProfilePage';
 
 class AppRouter extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class AppRouter extends Component {
     render() {
         return(
            <BrowserRouter>
-                <Header updateNews={this.props.updateNews}/>
+                <Header updateNews={this.props.updateNews} loggedIn={this.props.loggedIn}/>
                 <Switch>
                     <Route path="/" render={() => <NewsPage news={this.props.news}/>} exact={true}/>
                     <Route 
@@ -25,21 +26,31 @@ class AppRouter extends Component {
                                             currency={this.props.currency}
                                             changeCurrency={this.props.changeCurrency}
                                         />
-                                    )}/>
-                    <Route path="/login" render={() => (<LoginPage 
+                                         )}/>
+                    <Route path="/login" render={(props) => (<LoginPage 
                                                             handleUsername={this.props.handleUsername}
                                                             handlePassword={this.props.handlePassword}
                                                             handleLogin={this.props.handleLogin}
                                                             loggedIn={this.props.loggedIn}
-                                                        />)} />
+                                                            name={this.props.name}
+                                                            err={this.props.err}
+                                                            {...props}
+                                                        />)
+                                                        }/>
                     <Route path="/bookmarks" component={BookmarksPage} />
+                    <Route path="/profile" render={() => (<ProfilePage
+                                                            loggedIn={this.props.loggedIn}
+                                                            name={this.props.name}
+                                                            />
+                                                            )} />
                     <Route path="/signup" render={() => (<SignupPage 
                                                             handleCreateUsername={this.props.handleCreateUsername}
                                                             handleCreatePassword={this.props.handleCreatePassword}
                                                             handleConfirmPassword={this.props.handleConfirmPassword}
                                                             handleRegister={this.props.handleRegister}
                                                             message={this.props.message}
-                                                            />)} />
+                                                            />)
+                                                            } />
                 </Switch>
             </BrowserRouter>
         );

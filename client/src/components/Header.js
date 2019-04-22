@@ -8,8 +8,10 @@ class Header extends Component {
             <img src="./img/CCN-Logo.png" alt="CCN-logo"/>
             <Link onClick={this.props.updateNews} to="/">News</Link>
             <Link  to="/price">Prices</Link>
-            <Link to="/bookmarks">Bookmarks</Link>
-            <Link to="/login">Login</Link>
+            {this.props.loggedIn ? <Link to="/bookmarks">Bookmarks</Link> : ''}
+            {this.props.loggedIn ? <Link to="/profile">Profile</Link> : ''}
+            {this.props.loggedIn ? '' : <Link to="/login">Login</Link>}
+
         </header>
         );
     }

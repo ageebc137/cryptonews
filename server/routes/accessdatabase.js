@@ -6,8 +6,9 @@ const _ = require('lodash');
 
 const router = express.Router();
 
-router.get('/register', (req,res) => {
+router.post('/register', (req,res) => {
    let body = _.pick(req.body, ['username', 'password']);
+   console.log(body);
    let user = new User(body);
    user.save().then(() => {
        res.send(user);
@@ -15,11 +16,13 @@ router.get('/register', (req,res) => {
    .catch((err) => res.status(400).send(err));
 });
 
-router.get('/login', (req,res) => {
+router.post('/login', (req,res) => {
     let body = _.pick(req.body, ['username', 'password']);
+    console.log(body);;
     User.findByCredentials(body.username, body.password).then((user) => {
         res.send(user);
-    });
+    })
+    .catch((err) => res.status(400).send(err));
 })
 
 // Add router.get('/bookmarks');

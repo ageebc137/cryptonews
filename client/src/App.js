@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import AppRouter from './router/AppRouter';
 import axios from 'axios';
+import { createBrowserHistory } from 'history';
+import { Redirect } from 'react-router-dom';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
       loggedIn: false,
       message: "",
+      err: false,
       news: [],
       price: "",
       prevPrice: "",
@@ -18,7 +23,8 @@ class App extends Component {
       createUsername:"",
       createPassword: "",
       confirmPassword: "",
-      bookmarks: []
+      bookmarks: [],
+      name:''
     };
     this.updateTicker = this.updateTicker.bind(this);
     this.updateNews = this.updateNews.bind(this);
@@ -30,6 +36,7 @@ class App extends Component {
     this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegister = this.handleRegister.bind(this); 
+    this.redirect = this.redirect.bind(this);
   }
   handleUsername(username) {
       this.setState({
@@ -41,8 +48,26 @@ class App extends Component {
       password
     });
   }
-  handleLogin() {
-    console.log(this.state.username, this.state.password);
+  redirect() {
+    return  <Redirect to="/bookmarks" />
+  }
+  handleLogin = (callback) => {
+    const username = this.state.username;
+    const password = this.state.password;
+    axios.post(('/db/login'), {username, password}).then((res) => {
+       this.setState({
+        name: res.data.username,
+        bookmarks: res.data.bookmarks,
+        loggedIn: true
+      });
+      callback();
+    })
+    .catch((error) => {
+          this.setState({
+            err: true
+          });
+    });
+
   }
   handleCreateUsername(createUsername) {
     this.setState({
@@ -74,7 +99,9 @@ class App extends Component {
           return;
     }
     
-    axios.get('/api/register')
+    axios.post(('/db/register'), {username: this.state.createUsername, password: this.state.createPassword}).then((res) => {
+        console.log(res);
+    })
 
   }
   updateTicker() {
@@ -148,6 +175,8 @@ class App extends Component {
           handleRegister={this.handleRegister}
           message={this.state.message}
           loggedIn={this.state.loggedIn}
+          name={this.state.name}
+          err={this.state.err}
         />
       </div>
     );

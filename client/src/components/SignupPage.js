@@ -31,7 +31,7 @@ class SignupPage extends Component {
                 </form>
                 <p>{this.props.message}</p>
             </div>
-        )
+        );
     }
 }
 
