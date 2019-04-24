@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 1,
+        unique: true,
         trim: true
     },
     password: {
@@ -22,6 +23,24 @@ UserSchema.methods.toJSON = function () {
     let user = this;
     let userObject = user.toObject();
     return _.pick(userObject, ['username', 'bookmarks']);
+}
+
+UserSchema.methods.addBookmark = function (bookmark) {
+    let user = this;
+    return user.update({
+        $push:{
+            bookmarks: bookmark
+        }
+    });
+};
+
+UserSchema.methods.removeBookmark = function (title) {
+    let user = this;
+    return user.update({
+        $pull:{
+            bookmarks: {title}
+        }
+    })
 }
 
 UserSchema.statics.findByCredentials = function(username, password) {
@@ -42,6 +61,7 @@ UserSchema.statics.findByCredentials = function(username, password) {
         });
     });
 }
+
 
 UserSchema.pre('save', function(next) {
     var user = this;

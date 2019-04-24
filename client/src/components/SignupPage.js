@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
 class SignupPage extends Component {
+    redirectLogin = () => {
+        this.props.history.push('/profile');
+    }
     render() {
         const handleCreateUsername = (e) => {
             const createUsername = e.target.value;
@@ -18,7 +21,7 @@ class SignupPage extends Component {
         }
         const handleRegister = (e) => {
             e.preventDefault();
-            this.props.handleRegister();
+            this.props.handleRegister(this.redirectLogin);
         }
 
         return (

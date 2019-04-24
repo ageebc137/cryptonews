@@ -18,13 +18,39 @@ router.post('/register', (req,res) => {
 
 router.post('/login', (req,res) => {
     let body = _.pick(req.body, ['username', 'password']);
-    console.log(body);;
     User.findByCredentials(body.username, body.password).then((user) => {
         res.send(user);
     })
     .catch((err) => res.status(400).send(err));
-})
+});
 
-// Add router.get('/bookmarks');
+router.post('/addbookmark', (req, res) => {
+    let username = req.body.username, bookmark = req.body.bookmark;
+    User.findOne({ username }).then((user) => {
+        return user.addBookmark(bookmark);
+    })
+    .then((response) => {
+        res.send(response);
+    })
+    .catch((err) => {
+        res.status(400).send(err);
+    })
+});
+
+router.post('/removebookmark', (req, res) => {
+    let username = req.body.username, bookmark = req.body.bookmark;
+    console.log(username, bookmark);
+    User.findOne({username}).then((user) => {
+        console.log(user);
+        return user.removeBookmark(bookmark);
+    })
+    .then((response) => {
+        res.send(response);
+    })
+    .catch((err) => {
+        res.status(400).send(err);
+    })
+});
+
 
 module.exports = router;

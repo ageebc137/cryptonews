@@ -20,7 +20,6 @@ class LoginPage extends Component {
         }
         return (
             <div>
-              
                     <form>
                         <input onChange={handleUsername} type="textbox" placeholder="username"/>
                         <input onChange={handlePassword} type="password" placeholder="password" />

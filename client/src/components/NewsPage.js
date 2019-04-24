@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 
 class NewsPage extends Component {
+
   
     render() {
+        const addBookmark = (e) => {
+            e.preventDefault();
+            this.props.addBookmark(e.target.dataset.title, e.target.dataset.url);
+        }
         return(
             <div>
                 <h1>Top Stories</h1>
@@ -12,7 +17,12 @@ class NewsPage extends Component {
                     <img src={article.urlToImage} alt={article.title} />
                      <p>{article.title}</p>
                     </a>
-                     <button>&#9733;</button>
+                    {this.props.loggedIn ? (
+                        <button className="bookmark-btn" onClick={addBookmark} 
+                            data-title={article.title} 
+                            data-url={article.url}>&#9733;
+                         </button>
+                    ): ''} 
                 </div>
                 ))}
             </div>

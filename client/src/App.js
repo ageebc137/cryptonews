@@ -9,23 +9,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
-      loggedIn: false,
-      message: "",
-      err: false,
       news: [],
       price: "",
-      prevPrice: "",
       currency: 'USD',
+      loggedIn: false,
       bookmarks: [],
+      name:'',
+      message: "",
+      err: false,
       username: "",
       password: "",
       createUsername:"",
       createPassword: "",
-      confirmPassword: "",
-      bookmarks: [],
-      name:''
+      confirmPassword: ""
     };
+
     this.updateTicker = this.updateTicker.bind(this);
     this.updateNews = this.updateNews.bind(this);
     this.changeCurrency = this.changeCurrency.bind(this);
@@ -37,6 +35,8 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegister = this.handleRegister.bind(this); 
     this.redirect = this.redirect.bind(this);
+    this.addBookmark = this.addBookmark.bind(this);
+    this.removeBookmark = this.removeBookmark.bind(this);
   }
   handleUsername(username) {
       this.setState({
@@ -67,8 +67,8 @@ class App extends Component {
             err: true
           });
     });
-
   }
+  
   handleCreateUsername(createUsername) {
     this.setState({
       createUsername
@@ -84,7 +84,7 @@ class App extends Component {
       confirmPassword
     });
   }
-  handleRegister() {
+  handleRegister(callback) {
     console.log(this.state.createPassword, this.state.confirmPassword);
     if (this.state.createPassword.length < 6 || this.state.confirmPassword.length < 6) {
           console.log('hello');
@@ -100,8 +100,18 @@ class App extends Component {
     }
     
     axios.post(('/db/register'), {username: this.state.createUsername, password: this.state.createPassword}).then((res) => {
-        console.log(res);
+      this.setState({
+        name: res.data.username,
+        bookmarks: res.data.bookmarks,
+        loggedIn: true
+      });
+      callback();
     })
+    .catch((err) => {
+        this.setState({
+          message: 'This username is already taken'
+        })
+    });
 
   }
   updateTicker() {
@@ -136,6 +146,32 @@ class App extends Component {
       currency
     });
   }
+
+  addBookmark = (title, url) => {
+    if (this.state.bookmarks.map((bookmark, i) => bookmark.title).indexOf(title) >= 0) return console.log('Article already bookmarked')
+    this.setState((prevState) => ({
+      bookmarks: prevState.bookmarks.concat({title, url})
+    }));
+    axios.post('/db/addbookmark', {username: this.state.username, bookmark: {title, url}})
+          .then(res => {
+            console.log(res);
+          })
+  }
+  
+  removeBookmark = (bookmark, i) => {
+    const bookmarks = this.state.bookmarks.slice();
+    bookmarks.splice(i,1);
+    this.setState({
+      bookmarks
+    });
+    axios.post('/db/removeBookmark', {bookmark, username: this.state.name})
+        .then((response) => {
+          console.log('Bookmark was removed');
+        })
+        .catch((err) => console.error(err));
+
+  }
+
   componentDidMount() {
     let news;
     axios.get(('/api/getnews')).then((res) => {
@@ -154,8 +190,6 @@ class App extends Component {
     })
     .catch((err) => console.log(err));
   }
-
-
   render() {
     return (
       <div className="App">
@@ -177,6 +211,9 @@ class App extends Component {
           loggedIn={this.state.loggedIn}
           name={this.state.name}
           err={this.state.err}
+          addBookmark={this.addBookmark}
+          bookmarks={this.state.bookmarks}
+          removeBookmark={this.removeBookmark}
         />
       </div>
     );

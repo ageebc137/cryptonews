@@ -17,7 +17,7 @@ class AppRouter extends Component {
            <BrowserRouter>
                 <Header updateNews={this.props.updateNews} loggedIn={this.props.loggedIn}/>
                 <Switch>
-                    <Route path="/" render={() => <NewsPage news={this.props.news}/>} exact={true}/>
+                    <Route path="/" render={() => <NewsPage news={this.props.news} loggedIn={this.props.loggedIn} addBookmark={this.props.addBookmark} />} exact={true}/>
                     <Route 
                         path="/price" 
                         render={() => (<PricePage 
@@ -37,18 +37,19 @@ class AppRouter extends Component {
                                                             {...props}
                                                         />)
                                                         }/>
-                    <Route path="/bookmarks" component={BookmarksPage} />
+                    <Route path="/bookmarks" render={() => <BookmarksPage bookmarks={this.props.bookmarks} removeBookmark={this.props.removeBookmark}/>} />
                     <Route path="/profile" render={() => (<ProfilePage
                                                             loggedIn={this.props.loggedIn}
                                                             name={this.props.name}
                                                             />
                                                             )} />
-                    <Route path="/signup" render={() => (<SignupPage 
+                    <Route path="/signup" render={(props) => (<SignupPage 
                                                             handleCreateUsername={this.props.handleCreateUsername}
                                                             handleCreatePassword={this.props.handleCreatePassword}
                                                             handleConfirmPassword={this.props.handleConfirmPassword}
                                                             handleRegister={this.props.handleRegister}
                                                             message={this.props.message}
+                                                            {...props}
                                                             />)
                                                             } />
                 </Switch>
