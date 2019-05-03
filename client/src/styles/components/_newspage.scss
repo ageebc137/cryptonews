@@ -1,0 +1,31 @@
+.news-photo {
+    height: 15em;
+    width: 25em;
+}
+
+.article-header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    text-decoration: none;
+    color: white;
+}
+.article-header:hover {
+    background-color: grey;
+
+}
+
+#newspage-title {
+   padding-top: 1em;
+}
+
+.news-title {
+    padding-top: 3.5em;
+    padding-left: 1em;
+    font-size: 1.5em;
+}
+
+.bookmark-btn {
+    float: right;
+    width: 5em;
+}

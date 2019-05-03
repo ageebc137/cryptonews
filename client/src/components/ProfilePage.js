@@ -6,7 +6,7 @@ class ProfilePage extends Component {
            <div>
                {
                    (this.props.loggedIn) ?
-                   (<div>
+                   (<div id="profile-page">
                        <p>Welcome, {this.props.name}! You are logged in.</p>
                        <a href="">Logout</a>
                     </div>) :

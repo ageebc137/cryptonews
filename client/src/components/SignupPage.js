@@ -25,12 +25,12 @@ class SignupPage extends Component {
         }
 
         return (
-            <div>
+            <div id="signup-page">
                 <form>
-                    <input onChange={handleCreateUsername} type="text" placeholder="create username" />
-                    <input onChange={handleCreatePassword} type="password" placeholder="create password" />
-                    <input onChange={handleConfirmPassword} type="password" placeholder="confirm password"/>
-                    <button onClick={handleRegister}>Register</button>
+                    <input className="input-signup" onChange={handleCreateUsername} type="text" placeholder="create username" />
+                    <input className="input-signup" onChange={handleCreatePassword} type="password" placeholder="create password" />
+                    <input className="input-signup" onChange={handleConfirmPassword} type="password" placeholder="confirm password"/>
+                    <button className="input-signnup" onClick={handleRegister}>Register</button>
                 </form>
                 <p>{this.props.message}</p>
             </div>

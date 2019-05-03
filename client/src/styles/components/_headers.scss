@@ -1,0 +1,31 @@
+header {
+    font-family: 'Lato', sans-serif;
+    background-color: #D4D4D4;
+    position: fixed;
+    width: 100%;
+    top: 0em;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.navlink {
+    color: black;
+    padding: 1em;
+    float: right;
+    text-decoration: none;
+}
+.navlink:hover {
+    color: white;
+
+}
+#ccn-logo {
+    height: 3em;
+    padding-left: 1em;
+    float: left;
+}
+
+

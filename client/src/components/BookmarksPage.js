@@ -7,7 +7,7 @@ class BookmarksPage extends Component {
             this.props.removeBookmark(e.target.dataset.title, e.target.dataset.arrayid);
         } 
         return (
-            <div>
+            <div id="bookmark-page">
                 <h1>Bookmarks Page</h1>
                 {this.props.bookmarks.map((bookmark, i) => {
                     return (

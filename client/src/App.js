@@ -3,6 +3,7 @@ import AppRouter from './router/AppRouter';
 import axios from 'axios';
 import { createBrowserHistory } from 'history';
 import { Redirect } from 'react-router-dom';
+import './styles/styles.scss';
 
 
 class App extends Component {

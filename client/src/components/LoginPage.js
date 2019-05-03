@@ -19,7 +19,7 @@ class LoginPage extends Component {
             this.props.handleLogin(this.redirectLogin);
         }
         return (
-            <div>
+            <div id="loginpage">
                     <form>
                         <input onChange={handleUsername} type="textbox" placeholder="username"/>
                         <input onChange={handlePassword} type="password" placeholder="password" />

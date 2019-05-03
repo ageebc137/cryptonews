@@ -17,7 +17,8 @@ class PricePage extends Component {
         }
         return (
          
-            <div>
+            <div id="pricepage">
+                <h3>Bitcoin Price</h3>
                 <h2>{symbol}{!(isNaN(rate.rate_float)) && Number(rate.rate_float).toFixed(2)}</h2>
                 <form >
                     <div className="form-check">

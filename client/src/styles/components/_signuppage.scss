@@ -1,0 +1,18 @@
+#signup-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: grey;
+    width: 15em;
+    margin: 5em auto;
+    border-radius: 5px;
+}
+
+.input-signup {
+    display: block;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    height: 1.5em;
+}
