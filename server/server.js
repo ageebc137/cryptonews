@@ -20,7 +20,7 @@ app.use('/api', getInfoRouter);
 app.use('/db', accessDatabase);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/public/index.html'));
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 app.listen(port, () => console.log(`App is running on port ${port}`));
