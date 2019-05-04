@@ -20,6 +20,7 @@ app.use('/api', getInfoRouter);
 app.use('/db', accessDatabase);
 
 app.get('*', (req, res) => {
+    console.log(path.join(__dirname, '../client/public/index.html'));
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
