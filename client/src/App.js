@@ -80,11 +80,13 @@ class App extends Component {
       createPassword
     });
   }
+
   handleConfirmPassword(confirmPassword) {
     this.setState({
       confirmPassword
     });
   }
+  
   handleRegister(callback) {
     console.log(this.state.createPassword, this.state.confirmPassword);
     if (this.state.createPassword.length < 6 || this.state.confirmPassword.length < 6) {
@@ -100,7 +102,7 @@ class App extends Component {
           return;
     }
     
-    axios.post(('/db/register'), {username: this.state.createUsername, password: this.state.createPassword}).then((res) => {
+  axios.post(('/db/register'), {username: this.state.createUsername, password: this.state.createPassword}).then((res) => {
       this.setState({
         name: res.data.username,
         bookmarks: res.data.bookmarks,
@@ -135,6 +137,7 @@ class App extends Component {
               .catch((err) => console.log(err));
       }, 10000);
   }
+
   updateNews() {
     axios.get(('/api/getnews')).then((res) => {
       this.setState({
